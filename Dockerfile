@@ -1,4 +1,4 @@
-# 1. ビルド環境 (Java 21 対応の Maven を使用)
+# 1. ビルド環境 (最新の Java 21 を使用)
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY . .
