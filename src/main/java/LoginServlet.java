@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 	// External Database
 	// ✅ こちらに書き換えてください（Internal Hostnameを使用）
 
-	String URL = "jdbc:postgresql://dpg-d6kicsp5pdvs7381k1c0-a:5432/shonan_db";
+	String URL = "jdbc:postgresql://dpg-d6kicsp5pdvs7381k1c0-a.render.com:5432/shonan_db";
 	String DB_USER = "admin"; // Username欄の値
 	String DB_PASS = "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S"; // Password欄の値
 
@@ -35,49 +35,49 @@ public class LoginServlet extends HttpServlet {
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-	        throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	    // ① JSPの <input name="userId"> と一致させる
-	    String inputName = request.getParameter("userId");
-	    // ② JSPの <input name="userPass"> と一致させる
-	    String inputPass = request.getParameter("userPass"); 
+		// ① JSPの <input name="userId"> と一致させる
+		String inputName = request.getParameter("userId");
+		// ② JSPの <input name="userPass"> と一致させる
+		String inputPass = request.getParameter("userPass");
 
-	    try {
-	        Class.forName("org.postgresql.Driver");
-	        try (Connection conn = DriverManager.getConnection(URL, DB_USER, DB_PASS)) {
-	            
-	            // ③ ★最重要： email ではなく password カラムと比較するように修正
-	            String sql = "SELECT * FROM users_db WHERE name = ? AND password = ?";
-	            PreparedStatement st = conn.prepareStatement(sql);
-	            st.setString(1, inputName);
-	            st.setString(2, inputPass);
+		try {
+			Class.forName("org.postgresql.Driver");
+			try (Connection conn = DriverManager.getConnection(URL, DB_USER, DB_PASS)) {
 
-	            ResultSet rs = st.executeQuery();
+				// ③ ★最重要： email ではなく password カラムと比較するように修正
+				String sql = "SELECT * FROM users_db WHERE name = ? AND password = ?";
+				PreparedStatement st = conn.prepareStatement(sql);
+				st.setString(1, inputName);
+				st.setString(2, inputPass);
 
-	            if (rs.next()) {
-	                HttpSession session = request.getSession();
-	                
-	                // ★重要：この1行が抜けていると ProductServlet で追い出されます
-	                session.setAttribute("isLoggedIn", true); 
-	                
-	                session.setAttribute("userId", rs.getInt("id"));
-	                session.setAttribute("userName", rs.getString("name"));
-	                session.setAttribute("userRole", rs.getString("role"));
+				ResultSet rs = st.executeQuery();
 
-	                response.sendRedirect("ProductServlet");
-	            
-	            } else {
-	                // 失敗：エラーメッセージをセットして戻す
-	                request.setAttribute("error", "名前またはパスワードが違います");
-	                request.getRequestDispatcher("login.jsp").forward(request, response);
-	            }
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+				if (rs.next()) {
+					HttpSession session = request.getSession();
+
+					// ★重要：この1行が抜けていると ProductServlet で追い出されます
+					session.setAttribute("isLoggedIn", true);
+
+					session.setAttribute("userId", rs.getInt("id"));
+					session.setAttribute("userName", rs.getString("name"));
+					session.setAttribute("userRole", rs.getString("role"));
+
+					response.sendRedirect("ProductServlet");
+
+				} else {
+					// 失敗：エラーメッセージをセットして戻す
+					request.setAttribute("error", "名前またはパスワードが違います");
+					request.getRequestDispatcher("login.jsp").forward(request, response);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	}
+}
 
 /*
  * protected void doPost(HttpServletRequest request, HttpServletResponse
