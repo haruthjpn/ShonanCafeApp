@@ -35,43 +35,45 @@ public class LoginServlet extends HttpServlet {
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	        throws ServletException, IOException {
 
-		// JSPのinputのname属性に合わせて取得（name="adminId" と仮定）
-		String inputName = request.getParameter("adminId");
-		String inputEmail = request.getParameter("adminPass"); // 今回はパスワード代わりにEmailを使う例
+	    // ① JSPの <input name="userId"> と一致させる
+	    String inputName = request.getParameter("userId");
+	    // ② JSPの <input name="userPass"> と一致させる
+	    String inputPass = request.getParameter("userPass"); 
 
-		try {
-			Class.forName("org.postgresql.Driver");
-			try (Connection conn = DriverManager.getConnection(URL, DB_USER, DB_PASS)) { // 名前とEmailが一致するユーザーを探す
-				String sql = "SELECT * FROM users_db WHERE name = ? AND email = ?";
-				PreparedStatement st = conn.prepareStatement(sql);
-				st.setString(1, inputName);
-				st.setString(2, inputEmail);
+	    try {
+	        Class.forName("org.postgresql.Driver");
+	        try (Connection conn = DriverManager.getConnection(URL, DB_USER, DB_PASS)) {
+	            
+	            // ③ ★最重要： email ではなく password カラムと比較するように修正
+	            String sql = "SELECT * FROM users_db WHERE name = ? AND password = ?";
+	            PreparedStatement st = conn.prepareStatement(sql);
+	            st.setString(1, inputName);
+	            st.setString(2, inputPass);
 
-				ResultSet rs = st.executeQuery();
+	            ResultSet rs = st.executeQuery();
 
-				if (rs.next()) {
-					HttpSession session = request.getSession();
-					session.setAttribute("isLoggedIn", true);
-					session.setAttribute("userId", rs.getInt("id"));
-					session.setAttribute("userName", rs.getString("name"));
-
-					// ★権限（role）をセッションに保存 
-					session.setAttribute("userRole", rs.getString("role"));
-
-					response.sendRedirect("ProductServlet");
-				} else { // 【ログイン失敗】
-					request.setAttribute("error", "名前またはメールアドレスが違います");
-					request.getRequestDispatcher("/login.jsp").forward(request, response);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	            if (rs.next()) {
+	                HttpSession session = request.getSession();
+	                session.setAttribute("userId", rs.getInt("id"));
+	                session.setAttribute("userName", rs.getString("name"));
+	                session.setAttribute("userRole", rs.getString("role"));
+	                
+	                // 成功したら商品一覧へ
+	                response.sendRedirect("ProductServlet");
+	            } else {
+	                // 失敗：エラーメッセージをセットして戻す
+	                request.setAttribute("error", "名前またはパスワードが違います");
+	                request.getRequestDispatcher("login.jsp").forward(request, response);
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
-}
+	}
 
 /*
  * protected void doPost(HttpServletRequest request, HttpServletResponse

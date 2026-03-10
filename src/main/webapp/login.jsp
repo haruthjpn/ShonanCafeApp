@@ -28,16 +28,16 @@
         <% } %>
 
         <form action="LoginServlet" method="post">
-            <div class="input-group">
-                <label>お名前 (ログインID)</label>
-                <input type="text" name="adminId" required>
-            </div>
-            <div class="input-group">
-                <label>メールアドレス (パスワード代わり)</label>
-                <input type="password" name="adminPass" required>
-            </div>
-            <button type="submit">ログイン</button>
-        </form>
+    <div class="input-group">
+        <label>ユーザー名 (admin や user001)</label>
+        <input type="text" name="userId" required>
+    </div>
+    <div class="input-group">
+        <label>パスワード (1234など)</label>
+        <input type="password" name="userPass" required>
+    </div>
+    <button type="submit">ログイン</button>
+</form>
 
         <div class="footer">
             <p style="font-size: 0.8rem; color: #999;">初めての方はこちら</p>
