@@ -30,11 +30,11 @@ public class LoginServlet extends HttpServlet {
 	  String DB_PASS ="7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S"; // Password欄の値
 	 
 	// これを追記すると、URLを叩いた時に画面が表示されるようになります
-	/*
-	 * protected void doGet(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException {
-	 * request.getRequestDispatcher("login.jsp").forward(request, response); }
-	 */
+	
+	  protected void doGet(HttpServletRequest request, HttpServletResponse
+	  response) throws ServletException, IOException {
+	  request.getRequestDispatcher("login.jsp").forward(request, response); }
+	 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
