@@ -1,6 +1,6 @@
 <%-- ★修正1: ページ設定とタグライブラリの宣言は必ず一番上に書きます --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
 <title>商品管理</title>
