@@ -29,11 +29,11 @@
 
         <form action="LoginServlet" method="post">
     <div class="input-group">
-        <label>ユーザー名 (admin や user001)</label>
+        <label>ユーザー名 </label>
         <input type="text" name="userId" required>
     </div>
     <div class="input-group">
-        <label>パスワード (1234など)</label>
+        <label>パスワード </label>
         <input type="password" name="userPass" required>
     </div>
     <button type="submit">ログイン</button>

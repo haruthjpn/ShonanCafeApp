@@ -57,12 +57,16 @@ public class LoginServlet extends HttpServlet {
 
 	            if (rs.next()) {
 	                HttpSession session = request.getSession();
+	                
+	                // ★重要：この1行が抜けていると ProductServlet で追い出されます
+	                session.setAttribute("isLoggedIn", true); 
+	                
 	                session.setAttribute("userId", rs.getInt("id"));
 	                session.setAttribute("userName", rs.getString("name"));
 	                session.setAttribute("userRole", rs.getString("role"));
-	                
-	                // 成功したら商品一覧へ
+
 	                response.sendRedirect("ProductServlet");
+	            
 	            } else {
 	                // 失敗：エラーメッセージをセットして戻す
 	                request.setAttribute("error", "名前またはパスワードが違います");
