@@ -28,7 +28,7 @@ public class ProductServlet extends HttpServlet {
 	 * String URL =
 	 * "jdbc:postgresql://admin:7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S@dpg-d6kicsp5pdvs7381k1c0-a.oregon-postgres.render.com/shonan_db";
 	 */
-	String URL = "jdbc:postgresql://admin:dpg-d6kicsp5pdvs7381k1c0-a.singapore-postgres.render.com/shonan_db";
+	String URL = "postgresql://dpg-d6kicsp5pdvs7381k1c0-a.oregon-postgres.render.com/shonan_db";
 	String DB_USER = "admin";
 	String DB_PASS = "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S";
 

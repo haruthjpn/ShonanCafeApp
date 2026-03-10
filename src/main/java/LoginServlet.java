@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 	// External Database
 	// ✅ こちらに書き換えてください（Internal Hostnameを使用）
 
-	String URL = "jdbc:postgresql://admin:7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S@dpg-d6kicsp5pdvs7381k1c0-a.oregon-postgres.render.com/shonan_db";
+	String URL = "jdbc:postgresql://dpg-d6kicsp5pdvs7381k1c0-a.oregon-postgres.render.com/shonan_db";
 	String DB_USER = "admin"; // Username欄の値
 	String DB_PASS = "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S"; // Password欄の値
 
