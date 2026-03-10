@@ -14,15 +14,19 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/OrderServlet")
 public class OrderServlet extends HttpServlet {
 	/* ローカル */
+	
 	/*
 	 * private final String URL = "jdbc:postgresql://localhost:5432/my_practice";
-	 * private final String DB_USER = "postgres"; 
-	 * private final String DB_PASS =* "postgres";
+	 * private final String DB_USER = "postgres"; private final String DB_PASS
+	 * ="postgres";
 	 */
+	 
 	// External Database
-	String URL = "jdbc:postgresql://dpg-d6kicsp5pdvs7381...:5432/shonan_db"; 
-	String DB_USER = "admin";
-	String DB_PASS = "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S";
+	
+	  String URL = "jdbc:postgresql://dpg-d6kicsp5pdvs7381...:5432/shonan_db";
+	  String DB_USER = "admin"; String DB_PASS =
+	  "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S";
+	 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
@@ -35,6 +39,7 @@ public class OrderServlet extends HttpServlet {
         }
         
         int productId = Integer.parseInt(request.getParameter("productId"));
+        int orderCount = Integer.parseInt(request.getParameter("orderCount"));
         
         // ★ 判定用のフラグを try の外で用意します
         boolean isSuccess = false;
@@ -54,17 +59,20 @@ public class OrderServlet extends HttpServlet {
                 }
 
                 // 2. 在庫を減らす処理
-                String updateStockSql = "UPDATE products SET stock = stock - 1 WHERE id = ? AND stock > 0";
+                String updateStockSql = "UPDATE products SET stock = stock - ? WHERE id = ? AND stock >= ?";
                 PreparedStatement st1 = conn.prepareStatement(updateStockSql);
-                st1.setInt(1, productId);
+                st1.setInt(1, orderCount); // ★1つ目の?に数量をセット
+                st1.setInt(2, productId);
+                st1.setInt(3, orderCount); // ★3つ目の?（在庫チェック用）に数量をセット
                 int updatedRows = st1.executeUpdate();
 
                 if (updatedRows > 0) {
                     // 3. 注文履歴に保存
-                    String insertOrderSql = "INSERT INTO orders (user_id, product_id) VALUES (?, ?)";
+                	String insertOrderSql = "INSERT INTO orders (user_id, product_id, quantity) VALUES (?, ?, ?)";
                     PreparedStatement st2 = conn.prepareStatement(insertOrderSql);
                     st2.setInt(1, userId);
                     st2.setInt(2, productId);
+                    st2.setInt(3, orderCount); // ★数量をセット
                     st2.executeUpdate();
                     
                     // ★ すべて成功したらフラグを true にする

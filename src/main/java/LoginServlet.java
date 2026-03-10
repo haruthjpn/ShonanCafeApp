@@ -15,17 +15,28 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	/* ローカル */
+	
 	/*
 	 * private final String URL = "jdbc:postgresql://localhost:5432/my_practice";
-	 * private final String DB_USER = "postgres"; 
-	 * private final String DB_PASS =* "postgres";
+	 * private final String DB_USER = "postgres"; private final String DB_PASS =
+	 * "postgres";
 	 */
+	 
 	// External Database
-	String URL = "jdbc:postgresql://dpg-d6kicsp5pdvs7381...:5432/shonan_db"; 
-	String DB_USER = "admin";
-	String DB_PASS = "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S";
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	// ✅ こちらに書き換えてください（Internal Hostnameを使用）
+	
+	  String URL ="jdbc:postgresql://dpg-d6kicsp5pdvs7381k1c0-a:5432/shonan_db"; 
+	  String DB_USER = "admin"; // Username欄の値 
+	  String DB_PASS ="7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S"; // Password欄の値
+	 
+	// これを追記すると、URLを叩いた時に画面が表示されるようになります
+	/*
+	 * protected void doGet(HttpServletRequest request, HttpServletResponse
+	 * response) throws ServletException, IOException {
+	 * request.getRequestDispatcher("login.jsp").forward(request, response); }
+	 */
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
         // JSPのinputのname属性に合わせて取得（name="adminId" と仮定）

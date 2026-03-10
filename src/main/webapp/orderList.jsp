@@ -13,13 +13,33 @@
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/ja.json"
-            },
-            "pageLength": 10, // 1ページに表示する件数
-            "ordering": true  // 並び替え機能を有効にする
+        	language: {
+                "decimal": "",
+                "emptyTable": "データがありません",
+                "info": "_TOTAL_ 件中 _START_ から _END_ まで表示",
+                "infoEmpty": " 0 件中 0 から 0 まで表示",
+                "infoFiltered": "（全 _MAX_ 件より抽出）",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "_MENU_ 件ずつ表示",
+                "loadingRecords": "読み込み中...",
+                "processing": "処理中...",
+                "search": "検索:",
+                "zeroRecords": "一致するデータが見つかりません",
+                "paginate": {
+                    "first": "最初",
+                    "last": "最後",
+                    "next": "次へ",
+                    "previous": "前へ"
+                },
+                "aria": {
+                    "sortAscending": ": 列を昇順に並べ替えるための有効化",
+                    "sortDescending": ": 列を降順に並べ替えるための有効化"
+                }
+            }
         });
     });
+
 </script>
 <body>
     <%-- ナビゲーションバー --%>

@@ -19,15 +19,19 @@ public class UserServlet extends HttpServlet {
 
     
     /* ローカル */
+	
 	/*
 	 * private final String URL = "jdbc:postgresql://localhost:5432/my_practice";
-	 * private final String DB_USER = "postgres"; 
-	 * private final String DB_PASS =* "postgres";
+	 * private final String DB_USER = "postgres"; private final String DB_PASS =
+	 * "postgres";
 	 */
+	 
 	// External Database
-	String URL = "jdbc:postgresql://dpg-d6kicsp5pdvs7381...:5432/shonan_db"; 
-	String DB_USER = "admin";
-	String DB_PASS = "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S";
+	
+	  String URL = "jdbc:postgresql://dpg-d6kicsp5pdvs7381...:5432/shonan_db";
+	  String DB_USER = "admin"; String DB_PASS =
+	  "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S";
+	 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
 

@@ -37,7 +37,7 @@
 	</nav>
 
 	<main class="container">
-		<
+		
 		<div class="d-flex justify-content-between align-items-center mb-4">
 			<h2>📦 商品在庫管理</h2>
 			<div>
@@ -78,8 +78,7 @@
 					<th>商品名</th>
 					<th>価格</th>
 					<th>在庫数</th>
-					<th>操作</th>
-				</tr>
+					<th>ご注文</th> </tr>
 			</thead>
 			<tbody>
 				<c:forEach var="p" items="${products}">
@@ -105,14 +104,23 @@
 									</form>
 								</c:when>
 
-								<%-- 【購入者(customer)の場合】 注文ボタン（以前のまま） --%>
+								<%-- 【★修正箇所：購入者(customer)の場合】 数量指定 + 注文ボタン --%>
 								<c:otherwise>
 									<form action="OrderServlet" method="post"
-										style="display: inline;"
-										onsubmit="return confirm('${p.name} を1個注文します。よろしいですか？');">
+										class="d-flex align-items-center">
 										<input type="hidden" name="productId" value="${p.id}">
-										<button type="submit" class="btn btn-sm btn-success w-100"
-											${p.stock == 0 ? 'disabled' : ''}>${p.stock == 0 ? '売り切れ' : '注文する'}
+										
+										<%-- 在庫がある場合のみ数量入力を表示 --%>
+										<c:if test="${p.stock > 0}">
+											<input type="number" name="orderCount"
+												class="form-control form-control-sm me-2" 
+												value="1" min="1" max="${p.stock}"
+												style="width: 70px;">
+										</c:if>
+										
+										<button type="submit" class="btn btn-sm btn-success text-nowrap w-100"
+											${p.stock == 0 ? 'disabled' : ''}>
+											${p.stock == 0 ? '売り切れ' : '注文する'}
 										</button>
 									</form>
 								</c:otherwise>
