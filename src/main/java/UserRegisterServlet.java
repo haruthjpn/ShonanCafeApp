@@ -28,8 +28,10 @@ public class UserRegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// JSPのinputのname属性（name="name", name="email"）に合わせて取得
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
+		String userName = request.getParameter("userName");
+		String userMail = request.getParameter("userMail");
+		String userPass = request.getParameter("userPass");
+
 		// パスワードも登録する場合（必要に応じて）
 		// String password = request.getParameter("password");
 
@@ -38,11 +40,11 @@ public class UserRegisterServlet extends HttpServlet {
 			try (Connection conn = DriverManager.getConnection(URL, DB_USER, DB_PASS)) {
 				// 新規ユーザーを追加するSQL文
 				// roleの初期値を'customer'にする場合は、role列も指定します
-				String sql = "INSERT INTO users_db (name, email, role) VALUES (?, ?, 'customer')";
-
+				String sql = "INSERT INTO users_db (name, email, password, role) VALUES (?, ?, ?, 'customer')";
 				PreparedStatement st = conn.prepareStatement(sql);
-				st.setString(1, name);
-				st.setString(2, email);
+				st.setString(1, userName);
+				st.setString(2, userMail);
+				st.setString(3, userPass);
 
 				st.executeUpdate();
 			}

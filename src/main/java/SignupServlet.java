@@ -39,18 +39,19 @@ public class SignupServlet extends HttpServlet {
 		// JSPの name属性と完全に一致させる
 		String userName = request.getParameter("userName");
 		String userMail = request.getParameter("userMail");
+		String userPass = request.getParameter("userPass");
 
 		try {
 			Class.forName("org.postgresql.Driver");
 			try (Connection conn = DriverManager.getConnection(URL, DB_USER, DB_PASS)) {
 				// 既存のテーブル構成 に合わせたINSERT文
-				String sql = "INSERT INTO users_db (name, email, role) VALUES (?, ?, 'customer')";
+				String sql = "INSERT INTO users_db (name, email, password, role) VALUES (?, ?, ?, 'customer')";
 
 				// 変数sqlを渡す（ダブルクォーテーションは不要）
 				try (PreparedStatement st = conn.prepareStatement(sql)) {
 					st.setString(1, userName);
 					st.setString(2, userMail);
-
+					st.setString(3, userPass);
 					st.executeUpdate();
 					response.sendRedirect("login.jsp?msg=success");
 				}
