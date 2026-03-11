@@ -35,7 +35,10 @@ public class OrderListServlet extends HttpServlet {
         int totalCount = 0;
         Map<String, Integer> productSummary = new HashMap<>();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/my_practice", "postgres", "postgres")) {
+//        /        ローカルConnection
+//      try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/my_practice", "postgres", "postgres")) {
+//      External Connection	
+      try (Connection conn = DriverManager.getConnection("jdbc:postgresql://dpg-d6kicsp5pdvs7381k1c0-a.oregon-postgres.render.com/shonan_db", "admin", "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S")) {         
             
             // ★ SQLの切り分け
             String sql;

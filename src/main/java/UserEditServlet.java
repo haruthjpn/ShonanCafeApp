@@ -20,7 +20,7 @@ public class UserEditServlet extends HttpServlet {
 
 	// External Database
 
-	String URL = "jdbc:postgresql://dpg-d6kicsp5pdvs7381k1c0-a.render.com:5432/shonan_db";
+	String URL = "jdbc:postgresql://dpg-d6kicsp5pdvs7381k1c0-a.oregon-postgres.render.com/shonan_db";
 	String DB_USER = "admin";
 	String DB_PASS = "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S";
 

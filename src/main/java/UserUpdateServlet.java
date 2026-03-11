@@ -15,8 +15,10 @@ public class UserUpdateServlet extends HttpServlet {
         String id = request.getParameter("id");
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-
-        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/my_practice", "postgres", "postgres")) {
+//        ローカルConnection
+//        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/my_practice", "postgres", "postgres")) {
+//        External Connection	
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://dpg-d6kicsp5pdvs7381k1c0-a.oregon-postgres.render.com/shonan_db", "admin", "7yOIcqsNhYl7Bym8hoJ5LiwKSyWAcS7S")) {
             String sql = "UPDATE users_db SET name = ?, email = ? WHERE id = ?";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, name);
