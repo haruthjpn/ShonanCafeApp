@@ -28,7 +28,7 @@
 						</div>
 
 						<div class="mb-3">
-							<label class="form-label fw-bold">>パスワード</label> <input
+							<label class="form-label fw-bold">パスワード</label> <input
 								type="password" name="userPass" class="form-control" required>
 						</div>
 
