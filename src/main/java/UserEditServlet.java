@@ -42,6 +42,7 @@ public class UserEditServlet extends HttpServlet {
 					user.put("id", String.valueOf(rs.getInt("id")));
 					user.put("name", rs.getString("name"));
 					user.put("email", rs.getString("email"));
+					user.put("password", rs.getString("password"));
 					request.setAttribute("user", user);
 				}
 			}

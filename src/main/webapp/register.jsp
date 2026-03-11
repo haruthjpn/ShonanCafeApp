@@ -17,7 +17,8 @@
 					<form action="UserRegisterServlet" method="post">
 						<div class="mb-3">
 							<label class="form-label fw-bold">お名前</label> <input type="text"
-								name="userName" class="form-control" placeholder="例：湘南 太郎" required>
+								name="userName" class="form-control" placeholder="例：湘南 太郎"
+								required>
 						</div>
 
 						<div class="mb-3">
@@ -27,8 +28,8 @@
 						</div>
 
 						<div class="mb-3">
-							<label>パスワード</label> <input type="password" name="userPass"
-								required>
+							<label class="form-label fw-bold">>パスワード</label> <input
+								type="password" name="userPass" class="form-control" required>
 						</div>
 
 						<div class="d-grid gap-2 mt-4">

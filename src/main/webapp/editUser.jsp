@@ -23,6 +23,11 @@
                     <label class="form-label fw-bold">メールアドレス</label>
                     <input type="email" name="email" class="form-control" value="${user.email}" required>
                 </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold">パスワード</label>
+                    <input type="email" name="password" class="form-control" value="${user.password}" required>
+                </div>
 
                 <div class="mt-4">
                     <button type="submit" class="btn btn-success">内容を保存する</button>
