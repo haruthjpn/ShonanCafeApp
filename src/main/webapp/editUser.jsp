@@ -26,7 +26,7 @@
                 
                 <div class="mb-3">
                     <label class="form-label fw-bold">パスワード</label>
-                    <input type="email" name="password" class="form-control" value="${user.password}" required>
+                    <input type="email" name="password"  value="${user.password}" required>
                 </div>
 
                 <div class="mt-4">
